@@ -195,8 +195,8 @@ def update_shopify_price(variant_id, sku, pos_price, current_shopify_price):
     Price = POS price + 15%
     Only updates if the price needs to be updated (not already increased by 15% from POS price).
     """
-    # Calculate the target price (POS price + 15%)
-    target_price = round(pos_price * 1.15, 2)
+    # Calculate the target price (POS price + 25%)
+    target_price = round(pos_price * 1.25, 2)
     
     # Apply rounding to nearest 5 or 10 Egyptian Pounds
     target_price = round_to_5_or_10(target_price)
@@ -232,7 +232,7 @@ def update_shopify_price(variant_id, sku, pos_price, current_shopify_price):
         resp = requests.put(url, headers=headers, data=json.dumps(data), timeout=15)
         resp.raise_for_status()
         
-        print(f"💰 Updated price for SKU {sku}: {current_price_float} → {target_price} (+15% from POS price {pos_price})")
+        print(f"💰 Updated price for SKU {sku}: {current_price_float} → {target_price} (+25% from POS price {pos_price})")
         return True
         
     except requests.exceptions.RequestException as e:
